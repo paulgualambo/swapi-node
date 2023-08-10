@@ -1,0 +1,49 @@
+service: swapi-node
+frameworkVersion: '3'
+
+plugins:
+  - serverless-plugin-typescript
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - dynamodb:*
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/PlanetTable"
+
+functions:
+  Health:
+    handler: src/index.health
+    events:
+      - httpApi:
+          path: /health
+          method: get       
+  addPlanet:
+    handler: src/addPlanet.addPlanet
+    events:
+      - httpApi:
+          path: /v2/planets
+          method: post
+  getPlanet:
+    handler: src/getPlanet.getPlanet
+    events:
+      - httpApi:
+          path: /v2/planets/{id}
+          method: get
+
+resources:
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: PlanetTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
