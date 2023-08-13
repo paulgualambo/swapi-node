@@ -1,4 +1,6 @@
 export interface Planet {
+  id: string | null;
+  createdAt: string | null;
   climate: string | null;
   created: string | null;
   diameter: string | null;

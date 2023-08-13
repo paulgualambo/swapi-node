@@ -9,13 +9,13 @@ class Id {
   id: string = '';
 }
 
-export const getPlanet = async (
+export const getPlanetExterno = async (
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
   const { id } = event.pathParameters as unknown as Id;
 
   const uc = new PlanetUC(new PlanetRepositoryDynamo());
-  const result = await uc.get(id);
+  const result = await uc.getExterno(id);
 
   if (!result) {
     return {
@@ -36,6 +36,6 @@ export const getPlanet = async (
 };
 
 module.exports = {
-  getPlanet: getPlanet,
+  getPlanetExterno: getPlanetExterno,
   //middy(getToken).use(idTokenMiddleware()).use(httpErrorHandler()),
 };

@@ -1,0 +1,37 @@
+{
+    "_id": "18a9c071-44e7-4096-ba8e-387ef3b7d992",
+    "colName": "Planet",
+    "created": "2023-08-13T23:06:16.881Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7b1783d8-7219-43fe-aa6d-fa39c48a9a55",
+            "colId": "18a9c071-44e7-4096-ba8e-387ef3b7d992",
+            "containerId": "",
+            "name": "GetPlanetExterno",
+            "url": "https://5my94f9id3.execute-api.us-east-1.amazonaws.com/v2/planets/externo/1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-08-13T23:06:42.906Z",
+            "modified": "2023-08-13T23:06:42.906Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5e7374fb-b129-49c4-83a6-373f8b419672",
+            "colId": "18a9c071-44e7-4096-ba8e-387ef3b7d992",
+            "containerId": "",
+            "name": "GetPlanet",
+            "url": "https://5my94f9id3.execute-api.us-east-1.amazonaws.com/v2/planets/5e83f08a-218c-4094-be4d-0beb85211ade",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-08-13T23:07:44.588Z",
+            "modified": "2023-08-13T23:08:26.582Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

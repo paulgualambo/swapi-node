@@ -1,39 +1,68 @@
 service: swapi-node
-frameworkVersion: '3'
-
 plugins:
-  - serverless-plugin-typescript
+  - serverless-webpack
+  - serverless-s3-sync
+  - serverless-openapi-documentation-v2
+  - serverless-aws-documentation  
+  - serverless-dotenv-plugin
+# package:
+#   individually: true
 
 provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
+  stage: ${opt:stage, 'develop'}
   iamRoleStatements:
     - Effect: Allow
       Action: 
         - dynamodb:*
       Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/PlanetTable"
 
+
+package:
+  individually: true
 functions:
   Health:
     handler: src/index.health
     events:
       - httpApi:
           path: /health
-          method: get       
+          method: get
+  getPlanet:
+    handler: src/getPlanet.getPlanet
+    timeout: 10
+    events:
+      - httpApi:
+          path: /v2/planets/{id}
+          method: get
   addPlanet:
     handler: src/addPlanet.addPlanet
     events:
       - httpApi:
           path: /v2/planets
-          method: post
-  getPlanet:
-    handler: src/getPlanet.getPlanet
+          method: post          
+  getPlanetExterno:
+    handler: src/getPlanetExterno.getPlanetExterno
     events:
       - httpApi:
-          path: /v2/planets/{id}
-          method: get
-
+          path: /v2/planets/externo/{id}
+          method: get          
+custom:
+  openapiBucket: swapi-node-s3-openapi-${self:provider.stage}
+  openapiTitle: serverless-documentation-${self:provider.stage}
+  #documentation: ${file(serverless.doc.yml):documentation}
+  # this is the config for the s3sync plugin which will move all assets from src/assets into the s3 bucket
+  s3Sync:
+    - bucketName: ${self:custom.openapiBucket} # sync the openapi documentation to s3
+      localDir: docs/openapi
+      acl: public-read 
+  # this is the webpack config for the build
+  webpack:
+    webpackConfig: "webpack.config.js"
+    includeModules:
+      forceExclude:
+        - aws-sdk
 resources:
   Resources:
     TaskTable:
@@ -47,3 +76,15 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+        # this is the openapi s3 bucket which is publicly accessible
+    OpenAPIBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.openapiBucket}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+        OwnershipControls:
+          Rules:
+            - ObjectOwnership: ObjectWriter
+        WebsiteConfiguration:
+          IndexDocument: index.html

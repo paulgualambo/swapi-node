@@ -4,8 +4,8 @@
       "module": "commonjs",
       "lib": ["es6"],
       "allowJs": true,
-      "outDir": "build",
-      "rootDir": "src",
+      "outDir": "./dist",
+      "rootDir": "./src",
       "strict": true,
       "esModuleInterop": true,
       "types": ["node", "jest"],
@@ -13,10 +13,11 @@
     },
     "include": [
       "src/**/*",
-      "tests/*",
-      "tests/index.spec.ts",
-      "tests/example.spec.ts"
-  , "tests"  ],
+      // "tests/*",
+      // "tests/index.spec.ts",
+      // "tests/example.spec.ts",
+      // "tests"
+    ],
     "exclude": [
       "tests/**/*.spec.ts"
     ]

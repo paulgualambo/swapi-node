@@ -1,5 +1,11 @@
 # Prueba tecnica SWAPI
 
+## Endpoints seleccionados
+
+planets
+peolple
+films
+
 ## Tecnologías
 
 node 18
@@ -64,6 +70,26 @@ Desde aws se despliega con
 ```
 Esto creara el stack, que posee las funciones y la tabla dynamo donde se almacena
 
-## Evidencia
-
 ...
+
+## Ejecución local
+
+Consultar la api externa
+
+```
+serverless invoke local --function getPlanetExterno --path data-test/dataGetExterno.json
+```
+
+Consultar 
+```
+serverless invoke local --function getToken --path data-test/dataGet.json
+```
+pero antes editar la linea 39 al 41 con un nuevo id 
+
+```
+    "pathParameters": {
+        "id": "{nuevo_id_generado}"
+    },    
+```    
+
+## Evidencia

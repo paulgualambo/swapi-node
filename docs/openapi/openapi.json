@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.0",
+  "components": {
+    "schemas": {
+      "GetPlanetResponse": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "info": {
+    "title": "SWAPI",
+    "description": "Prueba tecnica",
+    "version": "1"
+  },
+  "servers": [],
+  "paths": {}
+}

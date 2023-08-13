@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../tokenization-cards"
+		}
+	],
+	"settings": {
+		"thunder-client.multiRootWorkspaceName": "swapi-node"
+	}
+}
