@@ -14,7 +14,7 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-08-13T23:06:42.906Z",
-            "modified": "2023-08-13T23:06:42.906Z",
+            "modified": "2023-08-14T03:46:25.448Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -31,6 +31,25 @@
             "modified": "2023-08-13T23:08:26.582Z",
             "headers": [],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "87498a57-3e4d-4fc9-9a74-273cb145a8f6",
+            "colId": "18a9c071-44e7-4096-ba8e-387ef3b7d992",
+            "containerId": "",
+            "name": "AddPlanet",
+            "url": "https://5my94f9id3.execute-api.us-east-1.amazonaws.com/v2/planets",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-08-13T23:12:20.572Z",
+            "modified": "2023-08-14T03:46:31.487Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"climate\": \"Arid\",\n    \"created\": \"2023-08-13\",\n    \"diameter\": \"10465\",\n    \"edited\": \"2023-08-13\",\n    \"gravity\": \"1\",\n    \"name\": \"Nuevo Planeta\",\n    \"orbital_period\": \"304\",\n    \"population\": \"120000\",\n    \"rotation_period\": \"23\",\n    \"surface_water\": \"1\",\n    \"terrain\": \"Dessert\",\n    \"url\": \"https://swapi.py4e.com/api/planets/1/\"\n}",
+                "form": []
+            },
             "tests": []
         }
     ]

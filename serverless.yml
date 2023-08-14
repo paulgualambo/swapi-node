@@ -4,7 +4,7 @@ plugins:
   - serverless-s3-sync
   - serverless-openapi-documentation-v2
   - serverless-aws-documentation  
-  - serverless-dotenv-plugin
+  - serverless-dotenv-plugin    
 # package:
 #   individually: true
 
@@ -17,7 +17,9 @@ provider:
     - Effect: Allow
       Action: 
         - dynamodb:*
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/PlanetTable"
+      Resource:
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/PlanetTable"
+        - "arn:aws:dynamodb:${self:provider.region}:*:table/VehicleTable"
 
 
 package:
@@ -47,7 +49,27 @@ functions:
     events:
       - httpApi:
           path: /v2/planets/externo/{id}
-          method: get          
+          method: get
+  getVehicle:
+    handler: src/getVehicle.getVehicle
+    timeout: 10
+    events:
+      - httpApi:
+          path: /v2/Vehicles/{id}
+          method: get
+  addVehicle:
+    handler: src/addVehicle.addVehicle
+    events:
+      - httpApi:
+          path: /v2/Vehicles
+          method: post          
+  getVehicleExterno:
+    handler: src/getVehicleExterno.getVehicleExterno
+    events:
+      - httpApi:
+          path: /v2/Vehicles/externo/{id}
+          method: get
+
 custom:
   openapiBucket: swapi-node-s3-openapi-${self:provider.stage}
   openapiTitle: serverless-documentation-${self:provider.stage}
@@ -63,6 +85,7 @@ custom:
     includeModules:
       forceExclude:
         - aws-sdk
+ 
 resources:
   Resources:
     TaskTable:
@@ -76,6 +99,17 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+    VehicleTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: VehicleTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH            
         # this is the openapi s3 bucket which is publicly accessible
     OpenAPIBucket:
       Type: AWS::S3::Bucket

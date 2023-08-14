@@ -3,7 +3,7 @@
 ## Endpoints seleccionados
 
 planets
-peolple
+people
 films
 
 ## Tecnologías
@@ -82,8 +82,14 @@ serverless invoke local --function getPlanetExterno --path data-test/dataGetExte
 
 Consultar 
 ```
-serverless invoke local --function getToken --path data-test/dataGet.json
+serverless invoke local --function getPlanet --path data-test/dataGet.json
 ```
+
+Insertar
+```
+serverless invoke local --function addPlanet --path data-test/dataAddPlanet.json
+```
+
 pero antes editar la linea 39 al 41 con un nuevo id 
 
 ```
